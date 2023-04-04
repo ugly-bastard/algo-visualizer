@@ -1,0 +1,5 @@
+# ignore .pyc python cache files
+**/__pycache__/
+
+# ignore python virtual env
+/.minpro/
