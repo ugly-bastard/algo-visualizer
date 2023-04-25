@@ -1,7 +1,7 @@
 import pygame
 from tkinter import Tk, ttk, messagebox
 
-from algo import Astar, dijkstra, dfs
+from pathFinding.algo import Astar, dijkstra, dfs
 
 
 BLACK = (0,0,0)
@@ -12,6 +12,8 @@ GREEN = (0,255,0)
 PURPLE = (128,0,128)
 ORANGE = (255,165,0)
 TURQUOISE = (64,224,208)
+ROWS = 50
+WIDTH = 500
 
 class Spot:
     def __init__(self, row, col, width) -> None:
@@ -19,7 +21,6 @@ class Spot:
         self.col = col
         self.color = WHITE
         self.bros = []
-        self.previous = None
         self.width = width
 
     def getPos(self):
@@ -50,10 +51,21 @@ class Spot:
         self.color = PURPLE
 
     def draw(self, win):
-        pygame.draw.rect(win, self.color, (self.row*self.width, self.col*self.width, self.width, self.width))
+        if self.color in [ORANGE, TURQUOISE, PURPLE]:
+            pygame.draw.circle(
+                win,
+                self.color,
+                (self.row*self.width + self.width//2, self.col*self.width + self.width//2),
+                self.width//3 if self.color == PURPLE else self.width//2
+            )
+        else:
+            pygame.draw.rect(
+                win, 
+                self.color, 
+                (self.row*self.width, self.col*self.width, self.width, self.width)
+            )
 
     def addNeighbours(self, grid):
-        # self.bros = []
         if self.row > 0 and not grid[self.row][self.col-1].isBarrier():
             self.bros.append(grid[self.row][self.col-1])
 
@@ -215,7 +227,6 @@ class Working:
 
         pygame.quit()
 
-ROWS = 50
-WIDTH = 500
-work = Working(ROWS, WIDTH)
-work.main()
+if __name__ == "__maine__":
+    work = Working(ROWS, WIDTH)
+    work.main()

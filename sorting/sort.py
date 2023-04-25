@@ -2,10 +2,10 @@ import pygame
 import random
 import math
 from tkinter import Tk, ttk
-from algo import bubble, insertion, selection
-pygame.init()
+from sorting.algo import bubble, insertion, selection
 
 class DrawInformation:
+    pygame.init()
     BLACK = 0, 0, 0
     WHITE = 255, 255, 255
     GREEN = 0, 255, 0
